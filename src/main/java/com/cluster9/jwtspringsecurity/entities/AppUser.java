@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,7 @@ public class AppUser {
 	private Long id;
 	@Column(unique=true)
 	private String username;
+	// @JsonIgnore you should forbid the password to be send
 	private String password;
 	@ManyToMany(fetch=FetchType.EAGER)
 	private Collection<AppRole> roles=new ArrayList<>();

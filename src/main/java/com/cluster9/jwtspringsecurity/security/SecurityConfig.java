@@ -2,6 +2,7 @@ package com.cluster9.jwtspringsecurity.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable(); // the synchroniser token mechanism won't be used, the jwt will be instead
 		http.formLogin();
+		http.authorizeRequests().antMatchers("/login/**", ":register/**");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**")
+			.hasAuthority("ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 	}
 }
