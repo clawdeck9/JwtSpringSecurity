@@ -43,10 +43,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		//http.formLogin();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().antMatchers("/login/**", ":register/**");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**")
-			.hasAuthority("ADMIN");
+		// all the tasks access requires Admin authority
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ADMIN");
+		// all other tasks requires authentification, 
+		// means authenicationToken added to the secContext in the authauFilter
 		http.authorizeRequests().anyRequest().authenticated();
+		// filter chain:
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager()));
+		// add the authaurise filter before the usernamepasswordauthfilter:
 		http.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }
