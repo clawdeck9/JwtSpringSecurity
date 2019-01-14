@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable(); // the synchronizer token mechanism won't be used, the jwt will be instead
 		//disable the cookie auth mechanism 
 		// from reference auth to value authentication
-		//http.formLogin();
+		http.formLogin();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/login/**", ":register/**");
+		http.authorizeRequests().antMatchers("/login/**", ":register/**").permitAll();
 		// all the tasks access requires Admin authority
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ADMIN");
 		// all other tasks require authentication, 
