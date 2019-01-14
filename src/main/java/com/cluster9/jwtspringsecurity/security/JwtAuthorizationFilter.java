@@ -19,8 +19,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
-// this filter creates a AuthenticationToken from the jwt and adds the roles to it and send it to the SecurityContext,
-// the jwt is received directly from the client
+// this filter creates a AuthenticationToken from the jwt and adds the roles to it and 
+// sends it to the SecurityContext,the jwt is received directly from the client
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter{
 

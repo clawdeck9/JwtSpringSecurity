@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // the synchroniser token mechanism won't be used, the jwt will be instead
+		http.csrf().disable(); // the synchronizer token mechanism won't be used, the jwt will be instead
 		//disable the cookie auth mechanism 
 		// from reference auth to value authentication
 		//http.formLogin();
@@ -45,12 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/login/**", ":register/**");
 		// all the tasks access requires Admin authority
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ADMIN");
-		// all other tasks requires authentification, 
+		// all other tasks require authentication, 
 		// means authenicationToken added to the secContext in the authauFilter
 		http.authorizeRequests().anyRequest().authenticated();
 		// filter chain:
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager()));
-		// add the authaurise filter before the usernamepasswordauthfilter:
+		// add the authorize filter before the usernamepasswordauthfilter:
 		http.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }
