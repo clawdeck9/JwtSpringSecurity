@@ -2,8 +2,10 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 
 bin/
-
+my_notes/
 notes.txt
+.gitignore~
+src/main/resources/readme.md~
 
 
 ### STS ###

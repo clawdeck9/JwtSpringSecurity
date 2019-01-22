@@ -35,14 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.passwordEncoder(bcEncoder);
 	}
 	
+	// here we want to use a non-loginForm mechanism that allows a client (another server) to call this service
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // the synchronizer token mechanism won't be used, the jwt will be instead
+		http.csrf().disable(); // the synchronizer token mechanism won't be used, the jwt will be used instead
 		//disable the cookie auth mechanism 
 		// from reference auth to value authentication
-		http.formLogin();
+		// http.formLogin();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/login/**", ":register/**").permitAll();
+		http.authorizeRequests().antMatchers("/login/**");
 		// all the tasks access requires Admin authority
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ADMIN");
 		// all other tasks require authentication, 
