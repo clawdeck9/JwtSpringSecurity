@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// from reference auth to value authentication
 		// http.formLogin();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/login/**");
+		http.authorizeRequests().antMatchers("/login/**").permitAll();
 		// all the tasks access requires Admin authority
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ADMIN");
 		// all other tasks require authentication, 

@@ -13,7 +13,7 @@ import com.cluster9.jwtspringsecurity.service.AccountService;
 public class AccountRestController {
 	@Autowired
 	private AccountService ac;
-	@RequestMapping("/register")
+	@PostMapping("/register")
 	public AppUser register(@RequestBody RegisterForm  userForm){
 		if(ac.findUserByUsername(userForm.getUsername()) != null) 
 			throw new RuntimeException("The user already exists");

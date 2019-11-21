@@ -27,7 +27,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		// we'll create a client that sends the name as a json stream
+		// we have  a client that sends the name as a json stream
 		// String username = request.getParameter("username"); // use this if format is different
 		AppUser appUser = null;
 		try { // we should create a mapper as a bean and create a method that supply the bean to Spring
