@@ -28,10 +28,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain filterChain)
 			throws ServletException, IOException {
 		String jwt = req.getHeader(SecurityConstants.HEADER_STRING);
+		// if there is no Jwt, stop here
 		if (jwt == null) {
 			filterChain.doFilter(req, resp);
 			return; 
 		}
+		// if the jwt does not start with the bearer constant, stop here
 		if(! jwt.startsWith(SecurityConstants.TOKEN_PREFIX)){
 			filterChain.doFilter(req, resp);
 			return;
